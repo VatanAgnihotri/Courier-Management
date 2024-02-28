@@ -1,10 +1,46 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { BoxWrapper } from "../Components/Common/Box/Box.style";
 import { Typography } from "@mui/material";
 import Button from "../Components/Common/Button/Button";
+import DataTable from "../Components/Table/Table";
+import { data } from "../constants/data";
 
 function TableContainer(props) {
+  const [tableData, setTableData] = useState([]);
+
+  const getTatValue = useCallback((trip) => {
+    if (trip.etaDays <= 0) {
+      return "Others";
+    } else if (trip.tripEndTime.trim() || trip.lastPingTime.trim()) {
+      const date1 = new Date(trip.tripEndTime || trip.lastPingTime);
+      const date2 = new Date(trip.tripStartTime);
+      const date1Ms = date1.getTime();
+      const date2Ms = date2.getTime();
+      const differenceMs = date1Ms - date2Ms;
+      const differenceDays = Math.abs(differenceMs / (1000 * 60 * 60 * 24));
+      if (differenceDays >= trip.etaDays) {
+        return "On time";
+      } else {
+        return "Delayed";
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    setTableData((prev) => {
+      return data.map((trip, index) => {
+        let tat = getTatValue(trip);
+
+        return { ...trip, id: trip._id, tat };
+      });
+    });
+  }, [setTableData, getTatValue]);
+
   const onClick = () => {};
+
+  const onCellClick = (e) => {
+    console.log("event", e);
+  };
 
   return (
     <BoxWrapper
@@ -45,6 +81,9 @@ function TableContainer(props) {
           onClick={onClick}
           styles={{ width: "96px", bgColor: "#0057D1", margin: "5px" }}
         />
+      </BoxWrapper>
+      <BoxWrapper position="relative" top="50px" width="100%">
+        <DataTable data={tableData} onCellClick={onCellClick} />
       </BoxWrapper>
     </BoxWrapper>
   );
