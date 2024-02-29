@@ -7,6 +7,7 @@ import { data } from "../constants/data";
 
 function TableContainer(props) {
   const [tableData, setTableData] = useState([]);
+  const { setCounterData } = props;
 
   const getTatValue = useCallback((trip) => {
     if (trip.etaDays <= 0) {
@@ -30,11 +31,39 @@ function TableContainer(props) {
     setTableData((prev) => {
       return data.map((trip, index) => {
         let tat = getTatValue(trip);
-
         return { ...trip, id: trip._id, tat };
       });
     });
   }, [setTableData, getTatValue]);
+
+  useEffect(() => {
+    const counterData = {
+      totalTrips: { count: data.length },
+      delivered: { count: 0, percentage: 0, onTime: 0 },
+      delayed: { count: 0 },
+      inTransit: { count: 0, percentage: 0 },
+    };
+
+    tableData.forEach((trip, index) => {
+      if (trip.currentStatusCode === "DEL") {
+        counterData.delivered.count++;
+        trip.tat === "On time" && counterData.delivered.onTime++;
+      } else if (trip.currentStatusCode === "INT") {
+        counterData.inTransit.count++;
+      }
+      if (trip.tat === "Delayed") {
+        counterData.delayed.count++;
+      }
+    });
+    counterData.delivered.percentage = parseInt(
+      (counterData.delivered.count / counterData.totalTrips.count) * 100
+    );
+    counterData.inTransit.percentage = parseInt(
+      (counterData.inTransit.count / counterData.totalTrips.count) * 100
+    );
+
+    setCounterData(counterData);
+  }, [setCounterData, tableData]);
 
   const onClick = () => {};
 

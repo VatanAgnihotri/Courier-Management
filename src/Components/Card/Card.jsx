@@ -64,7 +64,7 @@ function Card(props) {
                   lineHeight="16px"
                   textAlign="center"
                 >
-                  72%
+                  {props?.boxTwoPercentage}%
                 </Span>
                 <br />
               </CardTypographyContainer>
@@ -100,7 +100,7 @@ function Card(props) {
                   lineHeight="16px"
                   textAlign="center"
                 >
-                  72%
+                  {props?.boxThreePercentage}%
                 </Span>
                 <br />
               </CardTypographyContainer>
@@ -147,7 +147,7 @@ function Card(props) {
                     <CardProgressBar
                       variant="determinate"
                       color="success"
-                      value={75}
+                      value={props?.percentage}
                     />
                     <CardTypographyContainer
                       zIndex={4}
@@ -163,7 +163,7 @@ function Card(props) {
                       letterSpacing="0px"
                       textAlign="center"
                     >
-                      {`${75}%`}
+                      {`${props?.percentage}%`}
                     </CardTypographyContainer>
                   </BoxWrapper>
                   <CardTypographyContainer
@@ -181,7 +181,7 @@ function Card(props) {
                     color="#666666"
                   >
                     Ontime:
-                    <Span>123256</Span>
+                    <Span>{props?.onTime}</Span>
                   </CardTypographyContainer>
                 </BoxWrapper>
               </BoxWrapper>

@@ -1,49 +1,112 @@
 import * as React from "react";
+
+import clsx from "clsx";
 import { DataGrid } from "@mui/x-data-grid";
 
 const columns = [
-  { field: "tripId", headerName: "Trip id", minWidth: 100 },
-  { field: "transporter", headerName: "Transporter", minWidth: 150 },
+  { field: "tripId", headerName: "Trip id", width: 100 },
+  { field: "transporter", headerName: "Transporter", width: 150 },
   {
     field: "source",
     headerName: "Source",
-    minWidth: 150,
+    width: 150,
   },
   {
     field: "dest",
     headerName: "Destination",
-    minWidth: 150,
+    width: 150,
   },
   {
     field: "phoneNumber",
     headerName: "Phone",
-    minWidth: 150,
+    width: 150,
   },
   {
     field: "etaDays",
     headerName: "ETA",
-    minWidth: 100,
+    width: 100,
   },
   {
     field: "distanceRemaining",
     headerName: "Distance remaining",
-    minWidth: 150,
+    width: 100,
   },
   {
     field: "currenStatus",
     headerName: "Trip Status",
-    minWidth: 150,
+    width: 200,
+    renderCell: (params) => (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <div
+          style={{
+            width: 120,
+            height: 30,
+            fontFamily: "Source Sans Pro",
+            backgroundColor: "#D7E3FE",
+            marginRight: 5,
+            borderRadius: "6px",
+            fontWeight: "400px",
+            fontSize: "12px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "#24428A",
+          }}
+        >
+          {params.value}
+        </div>
+      </div>
+    ),
   },
   {
     field: "tat",
     headerName: "TAT Status",
-    minWidth: 150,
+    width: 150,
+    renderCell: (params) => (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <div
+          style={{
+            width: 120,
+            height: 30,
+            fontFamily: "Source Sans Pro",
+            backgroundColor: `${
+              params.value === "On time"
+                ? "#C2FAEA"
+                : params.value === "Others"
+                ? "#FFECDB"
+                : "#F9D7D7"
+            }`,
+            marginRight: 5,
+            borderRadius: "6px",
+            fontWeight: "400px",
+            fontSize: "12px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: `${
+              params.value === "On time"
+                ? "#008F66"
+                : params.value === "Others"
+                ? "#D97F30"
+                : "#CC3333"
+            }`,
+          }}
+        >
+          {params.value}
+        </div>
+      </div>
+    ),
   },
 ];
 
 export default function DataTable(props) {
   return (
-    <div style={{ height: "100%", width: "100%" }}>
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+      }}
+    >
       <DataGrid
         rows={props.data}
         columns={columns}
@@ -55,7 +118,7 @@ export default function DataTable(props) {
             fontWeight: "500",
             lineHeight: "20px",
             letterSpacing: "0px",
-            textAlign: "left",
+            textAlign: "center",
           },
         }}
         initialState={{

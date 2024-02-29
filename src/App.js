@@ -1,15 +1,20 @@
-import logo from "./logo.svg";
-import "./App.css";
 import HeaderContainer from "./Containers/HeaderContainer";
 import CardContainer from "./Containers/CardContainer";
 import TableContainer from "./Containers/TableContainer";
 
+import { CounterContextProvider } from "./Providers/CounterValuesProvider";
+import { useState } from "react";
+
 function App() {
+  const [counterData, setCounterData] = useState(undefined);
+
   return (
     <div>
-      <HeaderContainer />
-      <CardContainer />
-      <TableContainer />
+      <CounterContextProvider counterData={counterData}>
+        <HeaderContainer />
+        <CardContainer />
+        <TableContainer setCounterData={setCounterData} />
+      </CounterContextProvider>
     </div>
   );
 }

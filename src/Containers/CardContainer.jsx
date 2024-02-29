@@ -2,8 +2,11 @@ import React from "react";
 
 import Card from "../Components/Card/Card";
 import { BoxWrapper } from "../Components/Common/Box/Box.style";
+import { useCounterContext } from "../Providers/CounterValuesProvider";
 
 function CardContainer(props) {
+  const { counterValues } = useCounterContext();
+
   return (
     <div>
       <BoxWrapper
@@ -34,14 +37,16 @@ function CardContainer(props) {
           }}
           width="240px"
           title="Total trips"
-          number="18,033"
+          number={counterValues?.totalTrips?.count}
         />
         <Card
           width="352px"
           title="Delivered"
           cardContainerWidth="70%"
           display="flex"
-          number="18,033"
+          number={counterValues?.delivered?.count}
+          percentage={counterValues?.delivered?.percentage}
+          onTime={counterValues?.delivered?.onTime}
           progressBar={true}
           justifyContent="space-between"
           titleStyle={{
@@ -69,11 +74,13 @@ function CardContainer(props) {
           boxOneColor="#e6bcbe"
           cardContainerBorderRight="1px solid #E0E0E0"
           title="Delayed"
-          number="18,033"
+          number={counterValues?.delayed?.count}
           boxTwoTitle="In transit"
-          boxTwoNumber="18,033"
+          boxTwoNumber={counterValues?.inTransit?.count}
+          boxTwoPercentage={counterValues?.inTransit?.percentage}
           boxThreeTitle="Delivered"
-          boxThreeNumber="18,033"
+          boxThreeNumber={counterValues?.delivered?.count}
+          boxThreePercentage={counterValues?.delivered?.percentage}
           titleStyle={{
             fontFamily: "Poppins",
             fontSize: "16px",
