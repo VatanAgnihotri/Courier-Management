@@ -45,7 +45,7 @@ function Card(props) {
                 marginTop="20px"
                 {...props.countStyle}
                 variant="body2"
-                marginLeft="-32px"
+                marginLeft="-62px"
               >
                 {props.boxTwoNumber}
                 <Span
@@ -56,7 +56,7 @@ function Card(props) {
                   borderRadius="4px"
                   gap="4px"
                   position="relative"
-                  left="30px"
+                  left="50px"
                   bottom="4px"
                   fontFamily="Source Sans Pro"
                   fontSize="12px"
@@ -81,7 +81,7 @@ function Card(props) {
                 marginTop="20px"
                 {...props.countStyle}
                 variant="body2"
-                marginLeft="-32px"
+                marginLeft="-68px"
               >
                 {props.boxThreeNumber}
                 <Span
@@ -92,7 +92,7 @@ function Card(props) {
                   borderRadius="4px"
                   gap="4px"
                   position="relative"
-                  left="30px"
+                  left="50px"
                   bottom="4px"
                   fontFamily="Source Sans Pro"
                   fontSize="12px"

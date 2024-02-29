@@ -126,8 +126,9 @@ export default function DataTable(props) {
             paginationModel: { page: 0, pageSize: 10 },
           },
         }}
-        onCellClick={(e) => props.onCellClick(e)}
-        pageSizeOptions={[5, 10]}
+        onStateChange={(e) => props.onCellClick(e)}
+        pageSizeOptions={[10, 20, 50]}
+        disableColumnFilter={true}
         checkboxSelection
       />
     </div>

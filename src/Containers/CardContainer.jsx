@@ -33,7 +33,7 @@ function CardContainer(props) {
             fontWeight: "600",
             lineHeight: "36px",
             letterSpacing: "0px",
-            textAlign: "center",
+            position: "relative",
           }}
           width="240px"
           title="Total trips"
@@ -64,7 +64,6 @@ function CardContainer(props) {
             fontWeight: "600",
             lineHeight: "36px",
             letterSpacing: "0px",
-            textAlign: "center",
           }}
         />
         <Card
@@ -98,7 +97,7 @@ function CardContainer(props) {
             lineHeight: "36px",
             letterSpacing: "0px",
             textAlign: "center",
-            marginLeft: "-80px",
+            marginLeft: "-120px",
           }}
         />
       </BoxWrapper>

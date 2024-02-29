@@ -4,7 +4,11 @@ import { PrimaryButton } from "./Button.style";
 function Button(props) {
   return (
     <>
-      <PrimaryButton variant="contained" onClick={() => props.onClick()} {...props.styles}>
+      <PrimaryButton
+        variant={props.variant}
+        onClick={() => props.onClick()}
+        {...props.styles}
+      >
         {props.text}
       </PrimaryButton>
     </>
