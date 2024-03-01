@@ -61,7 +61,7 @@ function TableContainer(props) {
 
   useEffect(() => {
     const counterData = {
-      totalTrips: { count: data.length },
+      totalTrips: { count: tableData.length },
       delivered: { count: 0, percentage: 0, onTime: 0 },
       delayed: { count: 0 },
       inTransit: { count: 0, percentage: 0 },
