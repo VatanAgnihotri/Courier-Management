@@ -5,6 +5,7 @@ import Button from "../Components/Common/Button/Button";
 import DataTable from "../Components/Table/Table";
 import { data } from "../constants/data";
 import UpdateForm from "../Components/UpdateForm/UpdateForm";
+import AddTripForm from "../Components/AddTripForm/AddTripForm";
 
 function TableContainer(props) {
   const [tableData, setTableData] = useState([]);
@@ -12,8 +13,15 @@ function TableContainer(props) {
   const [selectedRows, setSelectedRows] = useState([]);
   const [showUpdateModal, setUpdateModal] = useState(false);
   const [allStatus, setAllStatus] = useState([]);
+  const [showAddTripModal, setShowAddTripModal] = useState(false);
 
   const { setCounterData } = props;
+
+  const closeModel = (flag, setStatus, setDate) => {
+    setUpdateModal(flag);
+    setStatus("");
+    setDate("");
+  };
 
   const getTatValue = useCallback((trip) => {
     if (trip.etaDays <= 0) {
@@ -32,6 +40,15 @@ function TableContainer(props) {
       }
     }
   }, []);
+
+  const addTripData = (data, TripObjectStructure, setTripDetails) => {
+    const tripData = { ...data };
+    const date = new Date();
+    tripData["createdAt"] = date.toISOString();
+    setTableData((prev) => [tripData, ...prev]);
+    setTripDetails({ ...TripObjectStructure });
+    setShowAddTripModal(false);
+  };
 
   useEffect(() => {
     setTableData((prev) => {
@@ -76,14 +93,36 @@ function TableContainer(props) {
     else setShowUpdateButton(false);
   }, [selectedRows, setShowUpdateButton]);
 
-  const updateTableData = (data) => {
-    console.log("Data :: ::", data);
-    // setTableData((prev) => {});
+  const updateTableData = (data, setStatus, setDate) => {
+    closeModel(false, setStatus, setDate);
+    setTableData((prev) => {
+      return tableData.map((row, index) => {
+        if (row.id === selectedRows[0]) {
+          const item = {
+            ...row,
+            currenStatus: data.status.label,
+            currentStatusCode: data.status.value,
+          };
+          if (item.currentStatusCode === "DEL") item.tripEndTime = data.date;
+          else item.lastPingTime = data.date;
+
+          return item;
+        }
+        return row;
+      });
+    });
   };
 
   const onUpdateClick = () => {
     const data = tableData.find((res) => res.id === selectedRows[0]);
-    if (data.currentStatusCode === "BKD") {
+    if (data.currentStatusCode === "CS") {
+      setAllStatus([
+        { value: "BKD", label: "Booked" },
+        { value: "INT", label: "In Transit" },
+        { value: "RD", label: "Reached Destination" },
+        { value: "DEL", label: "Delivered" },
+      ]);
+    } else if (data.currentStatusCode === "BKD") {
       setAllStatus([
         { value: "INT", label: "In Transit" },
         { value: "RD", label: "Reached Destination" },
@@ -100,7 +139,9 @@ function TableContainer(props) {
     setUpdateModal(true);
   };
 
-  const addTrip = () => {};
+  const addTrip = () => {
+    setShowAddTripModal(true);
+  };
 
   const onCellClick = (e) => {
     setSelectedRows([...e?.rowSelection]);
@@ -176,8 +217,13 @@ function TableContainer(props) {
       <UpdateForm
         allStatus={allStatus}
         openModal={showUpdateModal}
-        closeModal={setUpdateModal}
+        closeModal={closeModel}
         updateTableData={updateTableData}
+      />
+      <AddTripForm
+        openModal={showAddTripModal}
+        closeModal={setShowAddTripModal}
+        addTripData={addTripData}
       />
     </>
   );

@@ -5,6 +5,7 @@ function Button(props) {
   return (
     <>
       <PrimaryButton
+        disabled={props.disabled}
         variant={props.variant}
         onClick={() => props.onClick()}
         {...props.styles}

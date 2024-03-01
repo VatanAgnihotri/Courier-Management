@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ModalWrapper } from "../Common/Modal/Modal.style";
 import { BoxWrapper } from "../Common/Box/Box.style";
 import { MenuItem, Typography } from "@mui/material";
@@ -22,9 +22,15 @@ const style = {
 const imageStyle = {};
 
 function UpdateForm(props) {
-  const [status, setStatus] = useState("");
-  const [date, setDate] = useState("");
+  const [status, setStatus] = useState(undefined);
+  const [date, setDate] = useState(undefined);
+  const [updateDisabled, setUpdateDisabled] = useState(true);
   const { allStatus } = props;
+
+  useEffect(() => {
+    setUpdateDisabled(!(status && date) || false);
+  }, [status, date, setUpdateDisabled]);
+
   return (
     <div>
       <ModalWrapper
@@ -57,7 +63,9 @@ function UpdateForm(props) {
               className="img-hover"
               alt="something went wrong!"
               src={Cross}
-              onClick={() => props.closeModal(false)}
+              onClick={() => {
+                props.closeModal(false, setStatus, setDate);
+              }}
             />
           </BoxWrapper>
           <BoxWrapper
@@ -74,7 +82,6 @@ function UpdateForm(props) {
             <PrimaryTextField
               size="small"
               select
-              defaultValue="BKD"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
               label={"Status"}
@@ -108,7 +115,7 @@ function UpdateForm(props) {
             <Button
               text="Cancel"
               variant="outlined"
-              onClick={() => props.closeModal(false)}
+              onClick={() => props.closeModal(false, setStatus, setDate)}
               styles={{
                 width: "106px",
                 bgColor: "#FFFFFF",
@@ -120,11 +127,16 @@ function UpdateForm(props) {
             <Button
               text="Update Status"
               variant="contained"
+              disabled={updateDisabled}
               onClick={() =>
-                props.updateTableData({
-                  status: allStatus.find((res) => res.value === status),
-                  date,
-                })
+                props.updateTableData(
+                  {
+                    status: allStatus.find((res) => res.value === status),
+                    date,
+                  },
+                  setStatus,
+                  setDate
+                )
               }
               styles={{ width: "126px", bgColor: "#0057D1", margin: "5px" }}
             />

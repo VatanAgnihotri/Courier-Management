@@ -110,6 +110,7 @@ export default function DataTable(props) {
       <DataGrid
         rows={props.data}
         columns={columns}
+        isRowSelectable={(params) => params.row.currentStatusCode !== "DEL"}
         sx={{
           ".MuiDataGrid-columnHeaders": {
             backgroundColor: "#E0E0E0",
