@@ -144,6 +144,10 @@ function Card(props) {
         </CardWrapper>
       ) : (
         <CardWrapper
+          onClick={(e) => {
+            e.stopPropagation();
+            setTableType(props.title === "Total trips" ? "all" : "delivered");
+          }}
           justifyContent={props?.justifyContent}
           display={props?.display}
           width={props.width}
@@ -154,15 +158,7 @@ function Card(props) {
           }}
         >
           <Stack wid direction="row" width="100%" spacing={18}>
-            <CardContentContainer
-              onClick={(e) => {
-                e.stopPropagation();
-                setTableType(
-                  props.title === "Total trips" ? "all" : "delivered"
-                );
-              }}
-              width={props?.cardContainerWidth}
-            >
+            <CardContentContainer width={props?.cardContainerWidth}>
               <CardTypographyContainer {...props.titleStyle} gutterBottom>
                 {props.title}
               </CardTypographyContainer>
@@ -176,14 +172,7 @@ function Card(props) {
               </CardTypographyContainer>
             </CardContentContainer>
             {props?.progressBar && (
-              <BoxWrapper
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setTableType("delivered");
-                }}
-                position="relative"
-                display="inline-flex"
-              >
+              <BoxWrapper position="relative" display="inline-flex">
                 <DividerDiv />
                 <BoxWrapper
                   top={0}

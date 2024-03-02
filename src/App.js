@@ -8,7 +8,7 @@ import { TableTypeContextProvider } from "./Providers/TableDataTypeProvider";
 
 function App() {
   const [counterData, setCounterData] = useState(undefined);
-  const [tableType, setTableType] = useState("all");
+  const [tableType, setTableType] = useState("delivered");
   return (
     <div>
       <CounterContextProvider counterData={counterData}>

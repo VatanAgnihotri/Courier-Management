@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const TableDataContext = createContext(undefined);
 
 export function TableTypeContextProvider(props) {
-  const [tableType, setTableType] = useState("all");
+  const [tableType, setTableType] = useState("delivered");
   const { type } = props;
 
   useEffect(() => {
