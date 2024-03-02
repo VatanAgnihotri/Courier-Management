@@ -36,24 +36,23 @@ Welcome to INTUGINE ASSIGNMENT UI repo. This repository uses [React](https://rea
  
 ---
  
-1. Replicate the Design. --> ==Done==
-2. Calculate the counter values from the sample data. --> ==Done==
-3. Calculate the TAT Status based on the following --> ==Done==
-a. Ontime - If the etaDays is lesser than or equal to the time taken for trip to run.
-(TripEndTime will be empty in case of not delivered, calculate based on lastPingTime for these cases) --> ==Done==
-b. Delayed - If the etaDays is grater than the time taken for trip to run.--> ==Done==
-c. Others - If eta days is 0/negative.--> ==Done==
-4. Table View --> ==Done==
-a. Table columns are sortable --> ==Done==
-b. On selecting different status counters show trips of the selected status. --> ==Done==
-c. Delivered counter will be selected by default. --> ==Done==
-5. Add Trip Form --> ==Done==
-a. On submission of the form add the trip to the sample data[2] that you are storing. --> ==Done==
-b. Add validations to the form. --> ==Done==
-6. Edit Trip Form. --> ==Done==
-a. Trip status can be updated in this form. --> ==Done==
-b. Status flow would be Booked -> In Transit -> Reached Destination -> Delivered. This will update currenStatus and currentStatusCode. --> ==Done==
-c. Status Time field will update lastPingTime and if the trip has been delivered then update the tripEndTime as well. --> ==Done==
+1. Replicate the Design. --> Done
+2. Calculate the counter values from the sample data. --> Done
+3. Calculate the TAT Status based on the following --> Done
+- Ontime - If the etaDays is lesser than or equal to the time taken for trip to run. (TripEndTime will be empty in case of not delivered, calculate based on lastPingTime for these cases) --> Done
+- Delayed - If the etaDays is grater than the time taken for trip to run.--> Done
+- Others - If eta days is 0/negative.--> Done
+4. Table View --> Done
+- Table columns are sortable --> Done
+- On selecting different status counters show trips of the selected status. --> Done
+- Delivered counter will be selected by default. --> Done
+5. Add Trip Form --> Done
+- On submission of the form add the trip to the sample data[2] that you are storing. --> Done
+- Add validations to the form. --> Done
+6. Edit Trip Form. --> Done
+- Trip status can be updated in this form. --> Done
+- Status flow would be Booked -> In Transit -> Reached Destination -> Delivered. This will update currenStatus and currentStatusCode. --> Done
+c. Status Time field will update lastPingTime and if the trip has been delivered then update the tripEndTime as well. --> Done
  
 
 ### Things I have implemented as per my understanding as it wasn't clear in the requirement document
