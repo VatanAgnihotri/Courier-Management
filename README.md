@@ -9,21 +9,21 @@ Welcome to INTUGINE ASSIGNMENT UI repo. This repository uses [React](https://rea
 ---
 ### Steps to run the application locally.
 
-#### 1. Prerequirements to run the application locally,
+#### 1. Pre-requirements to run the application locally,
  
 - You should have node and npm installed. [Click here](https://nodejs.org/en) to check how to install node locally.
 
 #### 2. Once you have installed the node and npm, clone the repo and run the below commands in the root folder.
 
-- ``` npm i ``` (This will intall the project dependencies)
+- ``` npm i ``` (This will install the project dependencies)
 - ``` npm start ``` (This will start the local server and server the application on port 3000).
 
 
 ### Steps to run the application in a docker container.
 
- #### 1. Prerequirements to run the application locally,
+ #### 1. Pre-requirements to run the application locally,
  
-- You should have the docker intalled. [Click here](https://docs.docker.com/get-docker/) to check how to install docker locally.
+- You should have the docker installed. [Click here](https://docs.docker.com/get-docker/) to check how to install docker locally.
 
 #### 2. Once you have installed the docker and it is running, clone the repo and run the below commands in the root folder.
 
@@ -39,7 +39,7 @@ Welcome to INTUGINE ASSIGNMENT UI repo. This repository uses [React](https://rea
 1. Replicate the Design. --> Done
 2. Calculate the counter values from the sample data. --> Done
 3. Calculate the TAT Status based on the following --> Done
-- Ontime - If the etaDays is lesser than or equal to the time taken for trip to run. (TripEndTime will be empty in case of not delivered, calculate based on lastPingTime for these cases) --> Done
+- On-time - If the etaDays is lesser than or equal to the time taken for trip to run. (TripEndTime will be empty in case of not delivered, calculate based on lastPingTime for these cases) --> Done
 - Delayed - If the etaDays is grater than the time taken for trip to run.--> Done
 - Others - If eta days is 0/negative.--> Done
 4. Table View --> Done
@@ -59,7 +59,7 @@ c. Status Time field will update lastPingTime and if the trip has been delivered
  
 ---
  
- 1. The update status will only be displayed if user selects only one trip, as it wasn't clear in the document whether user should be able to update multiple trips or not toghether.
+ 1. The update status will only be displayed if user selects only one trip, as it wasn't clear in the document whether user should be able to update multiple trips or not together.
  2. I have disabled the trips with the status Delivered as there is no further status to update after the trip is delivered.
  3. In the Add Trip modal, I have provided the unique default Id as the Id should always be unique and made the Trip Id field disabled as user shouldn't be able to add the same Ids.
  4. In the Add Trip, Phone Number length should always be 10 digits.
