@@ -6,6 +6,7 @@ import DataTable from "../Components/Table/Table";
 import { data } from "../constants/data";
 import UpdateForm from "../Components/UpdateForm/UpdateForm";
 import AddTripForm from "../Components/AddTripForm/AddTripForm";
+import { useTableDataContext } from "../Providers/TableDataTypeProvider";
 
 function TableContainer(props) {
   const [tableData, setTableData] = useState([]);
@@ -14,6 +15,13 @@ function TableContainer(props) {
   const [showUpdateModal, setUpdateModal] = useState(false);
   const [allStatus, setAllStatus] = useState([]);
   const [showAddTripModal, setShowAddTripModal] = useState(false);
+  const [deliveredStatusData, setDeliveredStatusData] = useState([]);
+  const [delayedStatusData, setDelayedStatusData] = useState([]);
+  const [inTransitStatusData, setInTransitStatusData] = useState([]);
+  const [displayData, setDisplayData] = useState([]);
+
+  const { tableType } = useTableDataContext();
+
 
   const { setCounterData } = props;
 
@@ -51,6 +59,24 @@ function TableContainer(props) {
   };
 
   useEffect(() => {
+    if (tableType === "delivered") {
+      setDisplayData(deliveredStatusData);
+    } else if (tableType === "delayed") {
+      setDisplayData(delayedStatusData);
+    } else if (tableType === "transit") {
+      setDisplayData(inTransitStatusData);
+    } else {
+      setDisplayData(tableData);
+    }
+  }, [
+    tableType,
+    deliveredStatusData,
+    delayedStatusData,
+    inTransitStatusData,
+    tableData,
+  ]);
+
+  useEffect(() => {
     setTableData((prev) => {
       return data.map((trip, index) => {
         let tat = getTatValue(trip);
@@ -67,15 +93,21 @@ function TableContainer(props) {
       inTransit: { count: 0, percentage: 0 },
     };
 
+    const deliveredData = [];
+    const inTransitData = [];
+    const delayedData = [];
     tableData.forEach((trip, index) => {
       if (trip.currentStatusCode === "DEL") {
         counterData.delivered.count++;
+        deliveredData.push({ ...trip });
         trip.tat === "On time" && counterData.delivered.onTime++;
       } else if (trip.currentStatusCode === "INT") {
         counterData.inTransit.count++;
+        inTransitData.push({ ...trip });
       }
       if (trip.tat === "Delayed") {
         counterData.delayed.count++;
+        delayedData.push({ ...trip });
       }
     });
     counterData.delivered.percentage = parseInt(
@@ -85,6 +117,9 @@ function TableContainer(props) {
       (counterData.inTransit.count / counterData.totalTrips.count) * 100
     );
 
+    setDeliveredStatusData([...deliveredData]);
+    setInTransitStatusData([...inTransitData]);
+    setDelayedStatusData([...delayedData]);
     setCounterData(counterData);
   }, [setCounterData, tableData]);
 
@@ -96,7 +131,7 @@ function TableContainer(props) {
   const updateTableData = (data, setStatus, setDate) => {
     closeModel(false, setStatus, setDate);
     setTableData((prev) => {
-      return tableData.map((row, index) => {
+      return prev.map((row, index) => {
         if (row.id === selectedRows[0]) {
           const item = {
             ...row,
@@ -211,7 +246,7 @@ function TableContainer(props) {
           </BoxWrapper>
         </BoxWrapper>
         <BoxWrapper position="relative" top="50px" width="100%">
-          <DataTable data={tableData} onCellClick={onCellClick} />
+          <DataTable data={displayData} onCellClick={onCellClick} />
         </BoxWrapper>
       </BoxWrapper>
       <UpdateForm

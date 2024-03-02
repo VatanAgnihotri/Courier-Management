@@ -6,7 +6,7 @@ import { useCounterContext } from "../Providers/CounterValuesProvider";
 
 function CardContainer(props) {
   const { counterValues } = useCounterContext();
-
+  const { setTableType } = props;
   return (
     <div>
       <BoxWrapper
@@ -18,6 +18,7 @@ function CardContainer(props) {
         justifyContent="space-around"
       >
         <Card
+          setTableType={setTableType}
           titleStyle={{
             fontFamily: "Poppins",
             fontSize: "16px",
@@ -40,6 +41,7 @@ function CardContainer(props) {
           number={counterValues?.totalTrips?.count}
         />
         <Card
+          setTableType={setTableType}
           width="352px"
           title="Delivered"
           cardContainerWidth="70%"
@@ -67,6 +69,7 @@ function CardContainer(props) {
           }}
         />
         <Card
+          setTableType={setTableType}
           width="592px"
           statusCard={true}
           cardContainerWidth="180px"

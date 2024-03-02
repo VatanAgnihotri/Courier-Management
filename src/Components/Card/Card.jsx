@@ -6,20 +6,30 @@ import {
   CardProgressBar,
   DividerDiv,
   Span,
-  Item,
 } from "./Card.style";
 import { BoxWrapper } from "../Common/Box/Box.style";
-import { Divider, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 
 function Card(props) {
+  const { setTableType } = props;
+
   return (
     <>
       {props.statusCard ? (
         <CardWrapper width={props.width} padding="0px" height="124px">
           <Stack direction="row" spacing={0}>
             <CardContentContainer
+              onClick={(e) => {
+                e.stopPropagation();
+                setTableType("delayed");
+              }}
               backgroundColor={props.boxOneColor}
               width={props?.cardContainerWidth}
+              sx={{
+                ":hover": {
+                  boxShadow: 20,
+                },
+              }}
             >
               <CardTypographyContainer {...props.titleStyle} gutterBottom>
                 {props.title}
@@ -33,7 +43,19 @@ function Card(props) {
                 <br />
               </CardTypographyContainer>
             </CardContentContainer>
-            <CardContentContainer width="174px" border="1px solid #E0E0E0">
+            <CardContentContainer
+              onClick={(e) => {
+                e.stopPropagation();
+                setTableType("transit");
+              }}
+              sx={{
+                ":hover": {
+                  boxShadow: 20,
+                },
+              }}
+              width="174px"
+              border="1px solid #E0E0E0"
+            >
               <CardTypographyContainer
                 {...props.titleStyle}
                 color="#666666"
@@ -69,7 +91,19 @@ function Card(props) {
                 <br />
               </CardTypographyContainer>
             </CardContentContainer>
-            <CardContentContainer width="174px" border="1px solid #E0E0E0">
+            <CardContentContainer
+              onClick={(e) => {
+                e.stopPropagation();
+                setTableType("delivered");
+              }}
+              sx={{
+                ":hover": {
+                  boxShadow: 20,
+                },
+              }}
+              width="174px"
+              border="1px solid #E0E0E0"
+            >
               <CardTypographyContainer
                 {...props.titleStyle}
                 color="#666666"
@@ -113,9 +147,22 @@ function Card(props) {
           justifyContent={props?.justifyContent}
           display={props?.display}
           width={props.width}
+          sx={{
+            ":hover": {
+              boxShadow: 20,
+            },
+          }}
         >
           <Stack wid direction="row" width="100%" spacing={18}>
-            <CardContentContainer width={props?.cardContainerWidth}>
+            <CardContentContainer
+              onClick={(e) => {
+                e.stopPropagation();
+                setTableType(
+                  props.title === "Total trips" ? "all" : "delivered"
+                );
+              }}
+              width={props?.cardContainerWidth}
+            >
               <CardTypographyContainer {...props.titleStyle} gutterBottom>
                 {props.title}
               </CardTypographyContainer>
@@ -129,7 +176,14 @@ function Card(props) {
               </CardTypographyContainer>
             </CardContentContainer>
             {props?.progressBar && (
-              <BoxWrapper position="relative" display="inline-flex">
+              <BoxWrapper
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setTableType("delivered");
+                }}
+                position="relative"
+                display="inline-flex"
+              >
                 <DividerDiv />
                 <BoxWrapper
                   top={0}

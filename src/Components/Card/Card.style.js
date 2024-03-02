@@ -15,6 +15,7 @@ export const CardWrapper = styled(Card)`
   justify-content: ${(props) => props.justifyContent ?? "default"};
   height: ${(props) => props.height ?? "100px"};
   padding: ${(props) => props.padding ?? "12px 24px 12px 24px"};
+  cursor: pointer;
   border-radius: 8px;
   & .css-1lt5qva-MuiCardContent-root:last-child {
     padding: 0;
