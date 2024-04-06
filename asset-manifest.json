@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/courier-management/static/css/main.1f0a67aa.css",
+    "main.js": "/courier-management/static/js/main.60a80126.js",
+    "static/js/453.e6259a27.chunk.js": "/courier-management/static/js/453.e6259a27.chunk.js",
+    "index.html": "/courier-management/index.html",
+    "static/media/Cross.svg": "/courier-management/static/media/Cross.4cf9631aef353f55ae0330aa56426677.svg",
+    "main.1f0a67aa.css.map": "/courier-management/static/css/main.1f0a67aa.css.map",
+    "main.60a80126.js.map": "/courier-management/static/js/main.60a80126.js.map",
+    "453.e6259a27.chunk.js.map": "/courier-management/static/js/453.e6259a27.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1f0a67aa.css",
+    "static/js/main.60a80126.js"
+  ]
+}
