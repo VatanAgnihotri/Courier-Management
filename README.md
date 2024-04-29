@@ -2,7 +2,7 @@
  
 ---
  
-Welcome to INTUGINE ASSIGNMENT UI repo. This repository uses [React](https://react.dev/) as front-end/UI.
+Welcome to the Courier Shipment Management UI repo. This repository uses [React](https://react.dev/) as front-end/UI.
  
 ### Getting Started
  
